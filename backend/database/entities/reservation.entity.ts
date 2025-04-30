@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./user.entity";
-import { Parking_spots } from "./parking_spots";
+import { Parking_spots } from "./parking_spots.entity";
 
 
 @Entity('reservations')
