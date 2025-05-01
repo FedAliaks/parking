@@ -1,27 +1,22 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./user.entity";
-import { Parking_spots } from "./parking_spots.entity";
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('reservations')
-export class Reservations {
+export class Reservation {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User, (user) => user.reservations)
-  @JoinColumn({ name: 'user_id' })
-  user: User;
+  @Column({ type: 'uuid' })
+  user_id: string;
 
-  @ManyToOne(() => Parking_spots, (Parking_spots) => Parking_spots.reservations)
-  @JoinColumn({ name: 'parking_spot_id' })
-  parking_spot: Parking_spots;
+  @Column({ type: 'uuid' })
+  parking_spot_id: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'date' })
   reserved_date: Date;
 
-  @Column({ type: 'timestamp' })
-  reserved_time: Date;
+  @Column({ type: 'time' })
+  reserved_time: string;
 
-  @Column({type: 'boolean'})
-  status: boolean
+  @Column({ type: 'boolean' })
+  status: boolean;
 }

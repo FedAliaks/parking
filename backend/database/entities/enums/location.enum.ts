@@ -1,4 +1,3 @@
-
 export enum LocationsEnum {
   Minsk = 'Minsk highway',
   Brest = 'Brest highway',

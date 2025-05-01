@@ -1,7 +1,7 @@
 import { config } from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
 
-config()
+config();
 
 let extraOptions = {};
 try {
@@ -11,11 +11,6 @@ try {
 } catch (e) {
   console.error('Error with parsing PGADDITIONALPARAMS:', e);
 }
-
-console.log(
-  'Entity paths:',
-  `${__dirname}/../../../database/entities/**/*.entity{.ts,.js}`,
-);
 
 export const typeOrmConfig: DataSourceOptions = {
   type: 'postgres',
@@ -36,6 +31,5 @@ export const typeOrmConfig: DataSourceOptions = {
   entities: [`database/entities/**/*.entity.{ts,js}`],
   migrations: [`database/migrations/*.{ts,js}`],
 };
-
 
 export default new DataSource(typeOrmConfig);
