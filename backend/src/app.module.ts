@@ -5,7 +5,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtModuleConfig, typeOrmConfig } from './config';
+import { typeOrmConfig } from './config/typeorm.config';
+import { jwtModuleConfig } from './config/jwt.config';
+
 
 @Module({
   imports: [

@@ -32,13 +32,13 @@ export const typeOrmConfig: DataSourceOptions = {
   synchronize: false,
   entities: [
     isCompiled
-      ? 'dist/database/entities/**/*.entity.js'
+      ? 'dist/database/entities/**/*.entity.{js,ts}'
       : 'database/entities/**/*.entity.ts',
   ],
   migrations: [
     isCompiled
-      ? 'dist/database/migrations/*.{js}'
-      : 'database/migrations/*.{ts}',
+      ? 'dist/database/migrations/**/*.js'
+      : 'database/migrations/**/*.ts',
   ],
 };
 
