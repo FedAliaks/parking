@@ -1,0 +1,1 @@
+export { ParkingPostPage } from './ParkingPostPage';
