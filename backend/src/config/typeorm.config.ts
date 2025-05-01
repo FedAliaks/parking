@@ -12,6 +12,8 @@ try {
   console.error('Error with parsing PGADDITIONALPARAMS:', e);
 }
 
+const isCompiled = __filename.endsWith('.js');
+
 export const typeOrmConfig: DataSourceOptions = {
   type: 'postgres',
   host: process.env['PGHOST'],
@@ -28,8 +30,16 @@ export const typeOrmConfig: DataSourceOptions = {
   extra: extraOptions,
   logging: false,
   synchronize: false,
-  entities: [`database/entities/**/*.entity.{ts,js}`],
-  migrations: [`database/migrations/*.{ts,js}`],
+  entities: [
+    isCompiled
+      ? 'dist/database/entities/**/*.entity.js'
+      : 'database/entities/**/*.entity.ts',
+  ],
+  migrations: [
+    isCompiled
+      ? 'dist/database/migrations/*.{js}'
+      : 'database/migrations/*.{ts}',
+  ],
 };
 
 export default new DataSource(typeOrmConfig);
