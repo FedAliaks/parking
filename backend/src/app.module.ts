@@ -7,6 +7,7 @@ import { UserModule } from './user/user.module';
 import { JwtModule } from '@nestjs/jwt';
 import { typeOrmConfig } from './config/typeorm.config';
 import { jwtModuleConfig } from './config/jwt.config';
+import { ParkingSpotModule } from './parking-spot/parking-spot.module';
 
 
 @Module({
@@ -15,6 +16,7 @@ import { jwtModuleConfig } from './config/jwt.config';
     TypeOrmModule.forRoot(typeOrmConfig),
     JwtModule.registerAsync(jwtModuleConfig),
     UserModule,
+    ParkingSpotModule,
   ],
   controllers: [AppController],
   providers: [AppService],
