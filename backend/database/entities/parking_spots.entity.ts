@@ -1,5 +1,4 @@
-import { LocationsEnum } from "database/enums/location.enum";
-
+import { LocationsEnum } from "./enums/location.enum";
 import { Reservations } from "./reservation.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
@@ -12,6 +11,6 @@ export class Parking_spots {
         @Column({type: 'enum', enum: LocationsEnum, default: LocationsEnum.Minsk})
         location: LocationsEnum;
 
-          @OneToMany(() => Reservations, (reservation) => reservation.parking_spot)
+        @OneToMany(() => Reservations, (reservation) => reservation.parking_spot)
           reservations: Reservations[];
 }
