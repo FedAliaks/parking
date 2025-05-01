@@ -10,7 +10,6 @@ import { jwtModuleConfig } from './config/jwt.config';
 import { ParkingSpotModule } from './parking-spot/parking-spot.module';
 import { ReservationModule } from './reservation/reservation.module';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),

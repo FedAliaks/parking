@@ -7,6 +7,6 @@ import { Reservation } from 'database/entities/reservation.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Reservation])],
   controllers: [ReservationController],
-  providers: [ReservationService]
+  providers: [ReservationService],
 })
 export class ReservationModule {}
