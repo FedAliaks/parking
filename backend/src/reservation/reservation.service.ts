@@ -1,14 +1,18 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Reservation } from 'database/entities/reservation.entity';
 import { Repository } from 'typeorm';
 import { SetReservationDTO } from './dto/set-reservation.dto';
+import { User } from 'database/entities/user.entity';
 
 @Injectable()
 export class ReservationService {
   constructor(
     @InjectRepository(Reservation)
     private readonly reservationRepo: Repository<Reservation>,
+
+    @InjectRepository(User)
+    private readonly userRepo: Repository<User>,
   ) {}
 
   async setReservation(dto: SetReservationDTO) {
@@ -26,5 +30,34 @@ export class ReservationService {
     });
 
     return this.reservationRepo.save(reservation);
+  }
+
+  async getAllReservationByUserId(id: string) {
+    await this.isUserIdValid(id);
+    return this.reservationRepo.find({
+      where: { user_id: id },
+      order: { reserved_date: 'DESC', reserved_time: 'DESC' },
+    });
+  }
+
+  async deleteReservation(id: string) {
+    await this.isReservationIdValid(id);
+    return await this.reservationRepo.delete(id);
+  }
+
+  private async isReservationIdValid(id: string) {
+    const reservation = await this.reservationRepo.findOne({
+      where: { id: id },
+    });
+    if (!reservation) {
+      throw new NotFoundException('Reservation has not found');
+    }
+  }
+
+  private async isUserIdValid(id: string) {
+    const user = await this.userRepo.findOne({ where: { id: id } });
+    if (!user) {
+      throw new NotFoundException('User has not found');
+    }
   }
 }

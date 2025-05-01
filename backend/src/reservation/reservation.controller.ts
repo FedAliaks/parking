@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ReservationService } from './reservation.service';
 import { SetReservationDTO } from './dto/set-reservation.dto';
 
@@ -9,5 +9,15 @@ export class ReservationController {
   @Post()
   async setReservation(@Body() dto: SetReservationDTO) {
     return this.reservationService.setReservation(dto);
+  }
+
+  @Get(':id')
+  async getAllReservationByUserId(@Param('id') id: string) {
+    return this.reservationService.getAllReservationByUserId(id);
+  }
+
+  @Delete(':id')
+  async deleteReservationById(@Param('id') id: string) {
+    return this.reservationService.deleteReservation(id);
   }
 }
