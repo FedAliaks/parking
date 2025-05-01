@@ -62,7 +62,7 @@ export class UserService {
     };
   }
 
-  private async findUserByEmail(email) {
+  private async findUserByEmail(email: string) {
     return this.userRepo.findOne({ where: { email } });
   }
 }
