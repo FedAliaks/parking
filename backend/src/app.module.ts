@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { typeOrmConfig } from './config/typeorm.config';
 import { jwtModuleConfig } from './config/jwt.config';
 import { ParkingSpotModule } from './parking-spot/parking-spot.module';
+import { ReservationModule } from './reservation/reservation.module';
 
 
 @Module({
@@ -17,6 +18,7 @@ import { ParkingSpotModule } from './parking-spot/parking-spot.module';
     JwtModule.registerAsync(jwtModuleConfig),
     UserModule,
     ParkingSpotModule,
+    ReservationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
