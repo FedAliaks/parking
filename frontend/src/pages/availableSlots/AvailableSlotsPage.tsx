@@ -7,6 +7,7 @@ import {
   StyledTitle,
   StyledTypography,
 } from '../../components/ui';
+import { COLORS } from '../../constants';
 
 interface TimeSlot {
   time: string;
@@ -64,11 +65,11 @@ export const AvailableSlotsPage = () => {
       <Box
         ref={scrollContainerRef}
         sx={{
-          maxHeight: 5 * 52,
+          maxHeight: 5 * 60,
           overflowY: 'auto',
-          border: '1px solid #e0e0e0',
+          border: `1px solid ${COLORS.primaryColor}`,
           borderRadius: 2,
-          backgroundColor: '#fafafa',
+          backgroundColor: `${COLORS.lightColor}`,
           mb: 2,
         }}
       >
@@ -85,11 +86,10 @@ export const AvailableSlotsPage = () => {
                 display="flex"
                 alignItems="center"
                 justifyContent="space-between"
-                px={1}
-                py={1}
+                p={1}
                 borderRadius={1}
-                bgcolor="#fff"
-                border="1px solid #e0e0e0"
+                bgcolor={`${COLORS.whiteColor}`}
+border={`1px solid ${COLORS.primaryColor}`}
               >
                 <StyledTypography color={available ? 'inherit' : 'error'}>
                   {`${time}${!available ? ' (Reserved)' : ''}`}

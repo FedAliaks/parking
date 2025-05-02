@@ -59,12 +59,12 @@ export const DataPickerPage = () => {
 
       <StyledFlexBox flexDirection="row">
         <IconButton onClick={handlePrevMonth}>
-          <ArrowBackIosNewIcon fontSize="small" sx={{ color: COLORS.primaryColor }} />
+          <ArrowBackIosNewIcon  sx={{ color: COLORS.primaryColor }} />
         </IconButton>
         <StyledSubtitle>{currentDate.format('MMMM YYYY').toUpperCase()}</StyledSubtitle>
 
         <IconButton onClick={handleNextMonth}>
-          <ArrowForwardIosIcon fontSize="small" sx={{ color: COLORS.primaryColor }} />
+          <ArrowForwardIosIcon sx={{ color: COLORS.primaryColor }} />
         </IconButton>
       </StyledFlexBox>
 
@@ -84,7 +84,7 @@ export const DataPickerPage = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            sx={{ border: '1px solid #eee', borderRadius: 1 }}
+            sx={{ border: `2px solid ${COLORS.lightColor}`, borderRadius: 2 }}
           >
             {day === null ? (
               ''

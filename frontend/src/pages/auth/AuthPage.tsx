@@ -31,15 +31,14 @@ export const AuthPage = () => {
     <StyledBox>
       <StyledTitle>PARKING</StyledTitle>
       <Tabs
-        value={tab}
-        onChange={handleChange}
-        centered
-        textColor="inherit"
-        TabIndicatorProps={{
-          style: {
-            backgroundColor: COLORS.primaryColor,
-          },
-        }}
+          value={tab}
+          onChange={handleChange}
+          centered
+          sx={{
+            '& .MuiTabs-indicator': {
+              backgroundColor: COLORS.primaryColor,
+            },
+          }}
       >
         <StyledTab label="Login" />
         <StyledTab label="Registration" />
@@ -50,6 +49,7 @@ export const AuthPage = () => {
         <StyledTextField label="Password" type="password" />
         <StyledButton onClick={handleClick}>{tab ? 'Sign Up' : 'Log In'}</StyledButton>
       </StyledFlexBox>
+
       {error && <StyledTypography color="error">Check login and password</StyledTypography>}
     </StyledBox>
   );
