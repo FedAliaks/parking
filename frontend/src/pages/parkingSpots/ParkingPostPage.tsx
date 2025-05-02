@@ -7,10 +7,9 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
 } from '@mui/material';
 import { COLORS } from '../../constants';
-import { StyledBox, StyledSubtitle, StyledTitle } from '../../components/ui';
+import { StyledBox, StyledSubtitle, StyledTitle, StyledTypography } from '../../components/ui';
 
 const parkingSpots = [
   { name: 'A–01', address: 'Street 1' },
@@ -38,48 +37,42 @@ export const ParkingSpotsPage = () => {
   return (
     <StyledBox>
       <StyledTitle>PARKING</StyledTitle>
+      <StyledSubtitle>List of parking slots</StyledSubtitle>
 
-      <Box p={2}>
-        <StyledSubtitle>List of parking slots</StyledSubtitle>
-
-        <TableContainer component={Paper} variant="outlined">
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>Parking place</TableCell>
-                <TableCell>Location</TableCell>
+      <TableContainer
+        component={Paper}
+        variant="outlined"
+        sx={{ maxHeight: 240, overflowY: 'auto' }}
+      >
+        <Table size="small" stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Parking place</TableCell>
+              <TableCell align="center">Location</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {parkingSpots.map((spot, index) => (
+              <TableRow
+                key={index}
+                sx={{
+                  cursor: 'pointer',
+                  transition: 'background-color 0.6s ease',
+                  '&:hover': {
+                    backgroundColor: COLORS.hoverPrimaryColor,
+                  },
+                }}
+                onClick={() => handleChooseParkingPost(spot.name)}
+              >
+                <TableCell align="center">{spot.name}</TableCell>
+                <TableCell align="center">{spot.address}</TableCell>
               </TableRow>
-            </TableHead>
-          </Table>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-          <Box sx={{ maxHeight: 240, overflowY: 'auto', width: '100%' }}>
-            <Table size="small">
-              <TableBody>
-                {parkingSpots.map((spot, index) => (
-                  <TableRow
-                    key={index}
-                    sx={{
-                      cursor: 'pointer',
-                      transition: 'background-color 0.6s ease',
-                      '&:hover': {
-                        backgroundColor: COLORS.hoverPrimaryColor,
-                      },
-                    }}
-                    onClick={() => handleChooseParkingPost(spot.name)}
-                  >
-                    <TableCell align="center">{spot.name}</TableCell>
-                    <TableCell align="center">{spot.address}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Box>
-        </TableContainer>
-
-        <Typography mt={2} variant="body2">
-          All places: {parkingSpots.length + 1}
-        </Typography>
-      </Box>
+      <StyledTypography>{`All places: ${parkingSpots.length + 1}`}</StyledTypography>
     </StyledBox>
   );
 };

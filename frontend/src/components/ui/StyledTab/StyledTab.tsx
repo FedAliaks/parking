@@ -1,7 +1,11 @@
-import { Tab, TabProps } from '@mui/material';
+import { Tab } from '@mui/material';
 import { COLORS } from '../../../constants';
 
-export const StyledTab: React.FC<TabProps> = ({ label, ...props }) => {
+interface IStyledTabProps {
+  label: string;
+}
+
+export const StyledTab: React.FC<IStyledTabProps> = ({ label, ...props }) => {
   return (
     <Tab
       label={label}

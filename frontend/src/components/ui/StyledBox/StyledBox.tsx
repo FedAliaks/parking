@@ -1,20 +1,22 @@
-import { Box, BoxProps } from '@mui/material';
+import { Box } from '@mui/material';
 import { COLORS } from '../../../constants';
+import { ReactNode } from 'react';
 
-export const StyledBox: React.FC<BoxProps> = ({ children, ...props }) => {
+export interface IStyledBoxProps {
+  children: ReactNode;
+}
+
+export const StyledBox: React.FC<IStyledBoxProps> = ({ children }) => {
   return (
     <Box
-      sx={{
-        backgroundColor: COLORS.lightColor,
-        border: `1px solid ${COLORS.primaryColor}`,
-        borderRadius: 8,
-        maxWidth: 400,
-        margin: 'auto',
-        mt: 8,
-        p: 2,
-        ...props.sx,
-      }}
-      {...props}
+      bgcolor={COLORS.lightColor}
+      border={`1px solid ${COLORS.primaryColor}`}
+      borderRadius={6}
+      maxWidth={400}
+      margin="auto"
+      mt={8}
+      p={2}
+      boxShadow={3}
     >
       {children}
     </Box>

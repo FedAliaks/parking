@@ -5,3 +5,4 @@ export { StyledTab } from './StyledTab';
 export { StyledTextField } from './StyledTextField';
 export { StyledTitle } from './StyledTitle';
 export { StyledFlexBox } from './StyledFlexBox';
+export { StyledTypography } from './StyledTypography';

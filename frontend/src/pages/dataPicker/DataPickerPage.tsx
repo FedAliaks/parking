@@ -8,7 +8,13 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import { daysOfWeek } from './constants';
 import { COLORS } from '../../constants';
-import { StyledBox, StyledSubtitle, StyledTitle } from '../../components/ui';
+import {
+  StyledBox,
+  StyledFlexBox,
+  StyledSubtitle,
+  StyledTitle,
+  StyledTypography,
+} from '../../components/ui';
 
 dayjs.locale('en');
 
@@ -46,13 +52,12 @@ export const DataPickerPage = () => {
   return (
     <StyledBox>
       <StyledTitle>PARKING PRO Reservation</StyledTitle>
-      <StyledSubtitle>Place A-02</StyledSubtitle>
+      <StyledFlexBox flexDirection="row">
+        <StyledSubtitle>Place A-02</StyledSubtitle>
+        <StyledTypography>Street 1</StyledTypography>
+      </StyledFlexBox>
 
-      <Typography variant="body2" mb={2}>
-        Street 1
-      </Typography>
-
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+      <StyledFlexBox flexDirection="row">
         <IconButton onClick={handlePrevMonth}>
           <ArrowBackIosNewIcon fontSize="small" sx={{ color: COLORS.primaryColor }} />
         </IconButton>
@@ -61,7 +66,7 @@ export const DataPickerPage = () => {
         <IconButton onClick={handleNextMonth}>
           <ArrowForwardIosIcon fontSize="small" sx={{ color: COLORS.primaryColor }} />
         </IconButton>
-      </Box>
+      </StyledFlexBox>
 
       <Box display="grid" gridTemplateColumns="repeat(7, 1fr)" mb={1}>
         {daysOfWeek.map(day => (

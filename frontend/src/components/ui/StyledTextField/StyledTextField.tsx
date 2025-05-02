@@ -1,7 +1,12 @@
-import { TextField, TextFieldProps } from '@mui/material';
+import { TextField } from '@mui/material';
 import { COLORS } from '../../../constants';
 
-export const StyledTextField: React.FC<TextFieldProps> = ({ label, type = 'text', ...props }) => {
+interface IStyledTextField {
+  label: string;
+  type?: string;
+}
+
+export const StyledTextField: React.FC<IStyledTextField> = ({ label, type = 'text' }) => {
   return (
     <TextField
       label={label}
@@ -19,7 +24,6 @@ export const StyledTextField: React.FC<TextFieldProps> = ({ label, type = 'text'
           color: COLORS.primaryColor,
         },
       }}
-      {...props}
     />
   );
 };

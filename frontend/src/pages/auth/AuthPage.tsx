@@ -1,4 +1,4 @@
-import { Box, Tabs, Typography } from '@mui/material';
+import { Tabs } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { COLORS } from '../../constants';
 import {
@@ -7,6 +7,8 @@ import {
   StyledFlexBox,
   StyledTab,
   StyledTextField,
+  StyledTitle,
+  StyledTypography,
 } from '../../components/ui';
 
 export const AuthPage = () => {
@@ -27,9 +29,7 @@ export const AuthPage = () => {
 
   return (
     <StyledBox>
-      <Typography variant="h3" align="center" fontWeight="bold" mb={2}>
-        PARKING
-      </Typography>
+      <StyledTitle>PARKING</StyledTitle>
       <Tabs
         value={tab}
         onChange={handleChange}
@@ -50,11 +50,7 @@ export const AuthPage = () => {
         <StyledTextField label="Password" type="password" />
         <StyledButton onClick={handleClick}>{tab ? 'Sign Up' : 'Log In'}</StyledButton>
       </StyledFlexBox>
-      {error && (
-        <Typography color="error" variant="body2" mt={2}>
-          {'Check login and password'}
-        </Typography>
-      )}
+      {error && <StyledTypography color="error">Check login and password</StyledTypography>}
     </StyledBox>
   );
 };

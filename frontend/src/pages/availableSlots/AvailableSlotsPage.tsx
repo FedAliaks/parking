@@ -1,6 +1,12 @@
-import { Box, Typography, Paper, Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-import { StyledButton, StyledTitle } from '../../components/ui';
+import {
+  StyledBox,
+  StyledButton,
+  StyledSubtitle,
+  StyledTitle,
+  StyledTypography,
+} from '../../components/ui';
 
 interface TimeSlot {
   time: string;
@@ -52,17 +58,7 @@ export const AvailableSlotsPage = () => {
   const isSelected = (time: string) => selectedSlots.includes(time);
 
   return (
-    <Paper
-      elevation={3}
-      sx={{
-        p: 3,
-        borderRadius: 4,
-        maxWidth: 400,
-        mx: 'auto',
-        mt: 6,
-        backgroundColor: '#fff',
-      }}
-    >
+    <StyledBox>
       <StyledTitle>Available slots for May 2:</StyledTitle>
 
       <Box
@@ -95,13 +91,9 @@ export const AvailableSlotsPage = () => {
                 bgcolor="#fff"
                 border="1px solid #e0e0e0"
               >
-                <Typography
-                  variant="body2"
-                  fontWeight={available ? 'normal' : 'bold'}
-                  color={available ? 'inherit' : 'error'}
-                >
-                  {time} {!available && '(Reserved)'}
-                </Typography>
+                <StyledTypography color={available ? 'inherit' : 'error'}>
+                  {`${time}${!available ? ' (Reserved)' : ''}`}
+                </StyledTypography>
 
                 {available && (
                   <StyledButton
@@ -114,7 +106,7 @@ export const AvailableSlotsPage = () => {
                 )}
 
                 {!available && (
-                  <StyledButton disabled fullWidth={false} size="small">
+                  <StyledButton disabled fullWidth={false}>
                     Reserved
                   </StyledButton>
                 )}
@@ -124,12 +116,11 @@ export const AvailableSlotsPage = () => {
         </Stack>
       </Box>
 
-      <Typography align="center" fontWeight="bold" mb={2}>
-        Successfully selected:{' '}
-        {selectedSlots.length > 0 ? selectedSlots.join(', ') : 'Nothing selected'}
-      </Typography>
+      <StyledSubtitle>
+        {`Successfully selected: ${selectedSlots.length > 0 ? selectedSlots.join(', ') : 'Nothing selected'}`}
+      </StyledSubtitle>
 
       <StyledButton onClick={handleBookSlots}>Book slots</StyledButton>
-    </Paper>
+    </StyledBox>
   );
 };
