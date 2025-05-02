@@ -1,6 +1,6 @@
 import { Box, BoxProps } from '@mui/material';
 
-export const CenteredBox: React.FC<BoxProps> = ({ children, ...props }) => {
+export const StyledBox: React.FC<BoxProps> = ({ children, ...props }) => {
   return (
     <Box
       sx={{

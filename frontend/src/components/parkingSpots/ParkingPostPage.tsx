@@ -9,8 +9,8 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { CenteredBox } from '../general/CenteredBox/CenteredBox';
 import { COLORS } from '../../constants';
+import { StyledBox } from '../general';
 
 const parkingSpots = [
   { name: 'A–01', address: 'Street 1' },
@@ -36,7 +36,7 @@ export const ParkingPostPage = () => {
   };
 
   return (
-    <CenteredBox>
+    <StyledBox>
       <Box sx={{ bgcolor: COLORS.primaryBackground, p: 2, borderRadius: '10px' }}>
         <Typography variant="h6" align="center" color="white" fontWeight="bold">
           PARKING
@@ -86,6 +86,6 @@ export const ParkingPostPage = () => {
           All places: {parkingSpots.length + 1}
         </Typography>
       </Box>
-    </CenteredBox>
+    </StyledBox>
   );
 };
