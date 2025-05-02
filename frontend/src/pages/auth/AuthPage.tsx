@@ -11,11 +11,13 @@ import {
   StyledTypography,
 } from '../../components/ui';
 import { sendAuthRequest } from './utils/sendAuthRequest';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthPage = () => {
   const [tab, setTab] = useState(0);
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const navigate = useNavigate();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -34,6 +36,7 @@ export const AuthPage = () => {
       const data = await sendAuthRequest(endpoint, email, password);
       console.log(`${endpoint} successful:`, data);
       setErrorMsg('');
+      navigate('/parking');
     } catch (error) {
       if (error instanceof Error) {
         setErrorMsg(error.message);

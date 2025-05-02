@@ -1,13 +1,19 @@
 import './App.css';
 import { CssBaseline } from '@mui/material';
-import { AuthPage, AvailableSlotsPage, DataPickerPage, ParkingSpotsPage } from './pages';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { routes } from './routes';
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <CssBaseline />
-      <AuthPage />
-    </>
+      <Routes>
+        {routes.map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
+        ))}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
