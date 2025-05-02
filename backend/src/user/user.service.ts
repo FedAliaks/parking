@@ -33,7 +33,15 @@ export class UserService {
       password: hash,
     });
 
-    return this.userRepo.save(user);
+    await this.userRepo.save(user);
+
+        const payload = { sub: user.id, email: user.email };
+
+        const token = this.jwtService.sign(payload);
+
+        return {
+          access_token: token,
+        };
   }
 
   async login(dto: LoginUserDto) {
@@ -55,10 +63,6 @@ export class UserService {
 
     return {
       access_token: token,
-      user: {
-        id: user.id,
-        email: user.email,
-      },
     };
   }
 

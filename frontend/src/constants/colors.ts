@@ -3,5 +3,5 @@ export const COLORS = {
   primaryColor: '#8B3A3A',
   darkColor: '#000000',
   lightColor: '#FFF5EE',
-  whiteColor: '#ffffff'
+  whiteColor: '#ffffff',
 };

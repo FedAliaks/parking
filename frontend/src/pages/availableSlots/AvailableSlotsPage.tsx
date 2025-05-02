@@ -33,7 +33,6 @@ export const AvailableSlotsPage = () => {
   const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const firstSelectedRef = useRef<HTMLDivElement>(null);
-  
 
   // Скроллим к первому выбранному слоту
   useEffect(() => {
@@ -90,7 +89,7 @@ export const AvailableSlotsPage = () => {
                 p={1}
                 borderRadius={1}
                 bgcolor={`${COLORS.whiteColor}`}
-border={`1px solid ${COLORS.primaryColor}`}
+                border={`1px solid ${COLORS.primaryColor}`}
               >
                 <StyledTypography color={available ? 'inherit' : 'error'}>
                   {`${time}${!available ? ' (Reserved)' : ''}`}

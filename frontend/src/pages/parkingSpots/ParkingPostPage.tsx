@@ -39,10 +39,7 @@ export const ParkingSpotsPage = () => {
       <StyledTitle>PARKING</StyledTitle>
       <StyledSubtitle>List of parking slots</StyledSubtitle>
 
-      <TableContainer
-        component={Paper}
-        sx={{ maxHeight: 240, overflowY: 'auto' }}
-      >
+      <TableContainer component={Paper} sx={{ maxHeight: 240, overflowY: 'auto' }}>
         <Table size="small" stickyHeader>
           <TableHead>
             <TableRow>

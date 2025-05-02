@@ -59,7 +59,7 @@ export const DataPickerPage = () => {
 
       <StyledFlexBox flexDirection="row">
         <IconButton onClick={handlePrevMonth}>
-          <ArrowBackIosNewIcon  sx={{ color: COLORS.primaryColor }} />
+          <ArrowBackIosNewIcon sx={{ color: COLORS.primaryColor }} />
         </IconButton>
         <StyledSubtitle>{currentDate.format('MMMM YYYY').toUpperCase()}</StyledSubtitle>
 
