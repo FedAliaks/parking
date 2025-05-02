@@ -7,9 +7,8 @@ import { useState } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 import { daysOfWeek } from './constants';
-import { StyledBox, StyledTitle } from '../general';
 import { COLORS } from '../../constants';
-import { StyledSubtitle } from '../general/StyledSubtitle/StyledSubtitle';
+import { StyledBox, StyledSubtitle, StyledTitle } from '../../components/ui';
 
 dayjs.locale('en');
 
@@ -46,8 +45,8 @@ export const DataPickerPage = () => {
 
   return (
     <StyledBox>
-      <StyledTitle textContent={'PARKING PRO Reservation'}></StyledTitle>
-      <StyledSubtitle textContent={'Place A-02'}></StyledSubtitle>
+      <StyledTitle>PARKING PRO Reservation</StyledTitle>
+      <StyledSubtitle>Place A-02</StyledSubtitle>
 
       <Typography variant="body2" mb={2}>
         Street 1
@@ -57,7 +56,7 @@ export const DataPickerPage = () => {
         <IconButton onClick={handlePrevMonth}>
           <ArrowBackIosNewIcon fontSize="small" sx={{ color: COLORS.primaryColor }} />
         </IconButton>
-        <StyledSubtitle textContent={currentDate.format('MMMM YYYY').toUpperCase()} />
+        <StyledSubtitle>{currentDate.format('MMMM YYYY').toUpperCase()}</StyledSubtitle>
 
         <IconButton onClick={handleNextMonth}>
           <ArrowForwardIosIcon fontSize="small" sx={{ color: COLORS.primaryColor }} />

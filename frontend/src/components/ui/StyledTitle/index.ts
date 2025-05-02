@@ -1,0 +1,1 @@
+export { StyledTitle } from './StyledTitle';

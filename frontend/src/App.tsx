@@ -1,12 +1,12 @@
 import './App.css';
 import { CssBaseline } from '@mui/material';
-import { DataPickerPage } from './components/dataPicker/DataPickerPage';
+import { AuthPage, DataPickerPage, ParkingSpotsPage } from './pages';
 
 function App() {
   return (
     <>
       <CssBaseline />
-      <DataPickerPage />
+      <ParkingSpotsPage />
     </>
   );
 }

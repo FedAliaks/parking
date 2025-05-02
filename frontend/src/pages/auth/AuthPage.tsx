@@ -1,7 +1,13 @@
 import { Box, Tabs, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { COLORS } from '../../constants';
-import { StyledBox, StyledButton, StyledTab, StyledTextField } from '../general';
+import {
+  StyledBox,
+  StyledButton,
+  StyledFlexBox,
+  StyledTab,
+  StyledTextField,
+} from '../../components/ui';
 
 export const AuthPage = () => {
   const [tab, setTab] = useState(0);
@@ -39,11 +45,11 @@ export const AuthPage = () => {
         <StyledTab label="Registration" />
       </Tabs>
 
-      <Box mt={2} display="flex" flexDirection="column" gap={3}>
+      <StyledFlexBox>
         <StyledTextField label="Email" />
         <StyledTextField label="Password" type="password" />
         <StyledButton onClick={handleClick}>{tab ? 'Sign Up' : 'Log In'}</StyledButton>
-      </Box>
+      </StyledFlexBox>
       {error && (
         <Typography color="error" variant="body2" mt={2}>
           {'Check login and password'}

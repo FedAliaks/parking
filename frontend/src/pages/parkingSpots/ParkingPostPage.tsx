@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import { COLORS } from '../../constants';
-import { StyledBox } from '../general';
+import { StyledBox, StyledSubtitle, StyledTitle } from '../../components/ui';
 
 const parkingSpots = [
   { name: 'A–01', address: 'Street 1' },
@@ -30,23 +30,17 @@ const parkingSpots = [
   { name: 'C–05', address: 'Street 4' },
 ];
 
-export const ParkingPostPage = () => {
+export const ParkingSpotsPage = () => {
   const handleChooseParkingPost = (id: string) => {
     console.log(id);
   };
 
   return (
     <StyledBox>
-      <Box sx={{ bgcolor: COLORS.primaryColor, p: 2, borderRadius: '10px' }}>
-        <Typography variant="h6" align="center" color="white" fontWeight="bold">
-          PARKING
-        </Typography>
-      </Box>
+      <StyledTitle>PARKING</StyledTitle>
 
       <Box p={2}>
-        <Typography variant="h6" gutterBottom>
-          List of parking slots
-        </Typography>
+        <StyledSubtitle>List of parking slots</StyledSubtitle>
 
         <TableContainer component={Paper} variant="outlined">
           <Table size="small">

@@ -1,0 +1,1 @@
+export { AvailableSlotsPage } from './AvailableSlotsPage';

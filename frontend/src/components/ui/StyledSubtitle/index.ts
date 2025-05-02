@@ -1,0 +1,1 @@
+export { StyledSubtitle } from './StyledSubtitle';
