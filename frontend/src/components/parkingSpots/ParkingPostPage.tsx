@@ -37,7 +37,7 @@ export const ParkingPostPage = () => {
 
   return (
     <StyledBox>
-      <Box sx={{ bgcolor: COLORS.primaryBackground, p: 2, borderRadius: '10px' }}>
+      <Box sx={{ bgcolor: COLORS.primaryColor, p: 2, borderRadius: '10px' }}>
         <Typography variant="h6" align="center" color="white" fontWeight="bold">
           PARKING
         </Typography>
@@ -68,7 +68,7 @@ export const ParkingPostPage = () => {
                       cursor: 'pointer',
                       transition: 'background-color 0.6s ease',
                       '&:hover': {
-                        backgroundColor: COLORS.hoverPrimaryBackground,
+                        backgroundColor: COLORS.hoverPrimaryColor,
                       },
                     }}
                     onClick={() => handleChooseParkingPost(spot.name)}

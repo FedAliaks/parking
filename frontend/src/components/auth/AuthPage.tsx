@@ -12,8 +12,8 @@ export const AuthPage = () => {
   };
 
   const handleClick = () => {
-    console.log('click button')
-  }
+    console.log('click button');
+  };
 
   useEffect(() => {
     console.log(tab);
@@ -31,20 +31,18 @@ export const AuthPage = () => {
         textColor="inherit"
         TabIndicatorProps={{
           style: {
-            backgroundColor: COLORS.primaryBackground,
+            backgroundColor: COLORS.primaryColor,
           },
         }}
       >
-        <StyledTab label='Login' />
-        <StyledTab label='Registration' />
+        <StyledTab label="Login" />
+        <StyledTab label="Registration" />
       </Tabs>
 
       <Box mt={2} display="flex" flexDirection="column" gap={3}>
-        <StyledTextField label='Email' />
+        <StyledTextField label="Email" />
         <StyledTextField label="Password" type="password" />
-        <StyledButton onClick={handleClick}>
-                    {tab ? 'Sign Up' : 'Log In'}
-        </StyledButton>
+        <StyledButton onClick={handleClick}>{tab ? 'Sign Up' : 'Log In'}</StyledButton>
       </Box>
       {error && (
         <Typography color="error" variant="body2" mt={2}>
