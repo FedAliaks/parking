@@ -33,6 +33,7 @@ export const AvailableSlotsPage = () => {
   const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const firstSelectedRef = useRef<HTMLDivElement>(null);
+  
 
   // Скроллим к первому выбранному слоту
   useEffect(() => {

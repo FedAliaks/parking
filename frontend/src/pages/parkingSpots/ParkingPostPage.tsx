@@ -41,7 +41,6 @@ export const ParkingSpotsPage = () => {
 
       <TableContainer
         component={Paper}
-        variant="outlined"
         sx={{ maxHeight: 240, overflowY: 'auto' }}
       >
         <Table size="small" stickyHeader>
