@@ -1,2 +1,2 @@
 export { COLORS } from './colors';
-export { ParkingSlotIdStorage } from './constants';
+export { ParkingSlotIdStorage, countHoursInDay } from './constants';

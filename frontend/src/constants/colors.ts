@@ -4,4 +4,7 @@ export const COLORS = {
   darkColor: '#000000',
   lightColor: '#FFF5EE',
   whiteColor: '#ffffff',
+  fullReservedColor: '#D9534F',
+  emptyReservedColor: '#5CB85C',
+  partReservedColor: '#F0AD4E',
 };

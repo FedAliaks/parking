@@ -1,8 +1,6 @@
 import { Box, IconButton } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { daysOfWeek } from './constants';
@@ -14,18 +12,19 @@ import {
   StyledTitle,
   StyledTypography,
 } from '../../components/ui';
-import { getAllReservationBySlotsId } from './utils/getAllReservationBySlotsId';
 import { TReservationSlotsResponse, TSlotsParametersResponse } from './types';
-import { getParkingSlotById } from './utils/getParkingSlotById';
+import { getAllReservationBySlotsId, getMonthlyReservationArray, getParkingSlotById, isBeforeCurrentMonth, setCalendarData } from './utils';
 
-dayjs.locale('en');
+
 
 export const DataPickerPage = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
-  const [reservetedSlots, setReservedSlots] = useState<TReservationSlotsResponse[]>([]);
+  const [reservedSlots, setReservedSlots] = useState<TReservationSlotsResponse[]>([]);
   const [currentSlot, setCurrentSlot] = useState<TSlotsParametersResponse | null>(null);
+  const [monthlyReservation, setMonthlyReservation] = useState<number[]>([]);
 
   const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
+  const calendarCells: (number | null)[] = [];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,33 +46,32 @@ export const DataPickerPage = () => {
     }
   }, []);
 
-  const getMockAvailability = (year: number, month: number) => {
-    const daysInMonth = dayjs(`${year}-${month + 1}-01`).daysInMonth();
-    const availability: Record<number, boolean> = {};
-    for (let day = 1; day <= daysInMonth; day++) {
-      availability[day] = Math.random() > 0.7;
+  const handlePrevMonth = () => {
+    const prevMonth = currentDate.subtract(1, 'month');
+
+    if (!isBeforeCurrentMonth(prevMonth)) {
+      setCurrentDate(prevMonth);
     }
-    return availability;
   };
+
+  const handleNextMonth = () => setCurrentDate(currentDate.add(1, 'month'));
+
+  useEffect(() => {
+    const year = currentDate.year();
+    const month = currentDate.month();
+    const reservationArr = getMonthlyReservationArray(reservedSlots, year, month);
+    console.log(reservationArr);
+    setMonthlyReservation(reservationArr);
+  }, [currentDate, reservedSlots]);
 
   const year = currentDate.year();
   const month = currentDate.month();
-  const startDayOfWeek = dayjs(`${year}-${month + 1}-01`).day() || 7;
-  const daysInMonth = currentDate.daysInMonth();
-  const availability = getMockAvailability(year, month);
 
-  const calendarCells: (number | null)[] = [];
 
-  for (let i = 1; i < startDayOfWeek; i++) {
-    calendarCells.push(null);
-  }
+  console.log(calendarCells);
+  console.log(monthlyReservation);
 
-  for (let day = 1; day <= daysInMonth; day++) {
-    calendarCells.push(day);
-  }
-
-  const handlePrevMonth = () => setCurrentDate(currentDate.subtract(1, 'month'));
-  const handleNextMonth = () => setCurrentDate(currentDate.add(1, 'month'));
+  const calendarData = setCalendarData(year, month, monthlyReservation)
 
   return (
     <StyledBox>
@@ -103,22 +101,21 @@ export const DataPickerPage = () => {
       </Box>
 
       <Box display="grid" gridTemplateColumns="repeat(7, 1fr)" gap={0.5}>
-        {calendarCells.map((day, idx) => (
+        {calendarData.map(({ key, day, bgColor }) => (
           <Box
-            key={idx}
+            key={key}
             height={40}
+            width={40}
             display="flex"
             justifyContent="center"
             alignItems="center"
-            sx={{ border: `2px solid ${COLORS.lightColor}`, borderRadius: 2 }}
+            sx={{
+              border: `2px solid ${COLORS.lightColor}`,
+              borderRadius: 2,
+              backgroundColor: day ? bgColor : 'transparent',
+            }}
           >
-            {day === null ? (
-              ''
-            ) : availability[day] ? (
-              <CheckCircleIcon fontSize="small" color="success" />
-            ) : (
-              <CancelIcon fontSize="small" color="error" />
-            )}
+            {day && <span>{day}</span>}
           </Box>
         ))}
       </Box>
