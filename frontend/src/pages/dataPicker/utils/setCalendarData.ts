@@ -1,7 +1,6 @@
 import dayjs from 'dayjs';
 import { setDayColor } from './setDayColor';
 
-
 export interface CalendarDayData {
   key: number;
   day: number | null;

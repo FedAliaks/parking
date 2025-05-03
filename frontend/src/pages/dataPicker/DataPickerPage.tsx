@@ -13,9 +13,13 @@ import {
   StyledTypography,
 } from '../../components/ui';
 import { TReservationSlotsResponse, TSlotsParametersResponse } from './types';
-import { getAllReservationBySlotsId, getMonthlyReservationArray, getParkingSlotById, isBeforeCurrentMonth, setCalendarData } from './utils';
-
-
+import {
+  getAllReservationBySlotsId,
+  getMonthlyReservationArray,
+  getParkingSlotById,
+  isBeforeCurrentMonth,
+  setCalendarData,
+} from './utils';
 
 export const DataPickerPage = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
@@ -24,7 +28,9 @@ export const DataPickerPage = () => {
   const [monthlyReservation, setMonthlyReservation] = useState<number[]>([]);
 
   const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
-  const calendarCells: (number | null)[] = [];
+  const year = currentDate.year();
+  const month = currentDate.month();
+  const calendarData = setCalendarData(year, month, monthlyReservation);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,6 +52,11 @@ export const DataPickerPage = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const reservationArr = getMonthlyReservationArray(reservedSlots, year, month);
+    setMonthlyReservation(reservationArr);
+  }, [currentDate, reservedSlots]);
+
   const handlePrevMonth = () => {
     const prevMonth = currentDate.subtract(1, 'month');
 
@@ -55,23 +66,6 @@ export const DataPickerPage = () => {
   };
 
   const handleNextMonth = () => setCurrentDate(currentDate.add(1, 'month'));
-
-  useEffect(() => {
-    const year = currentDate.year();
-    const month = currentDate.month();
-    const reservationArr = getMonthlyReservationArray(reservedSlots, year, month);
-    console.log(reservationArr);
-    setMonthlyReservation(reservationArr);
-  }, [currentDate, reservedSlots]);
-
-  const year = currentDate.year();
-  const month = currentDate.month();
-
-
-  console.log(calendarCells);
-  console.log(monthlyReservation);
-
-  const calendarData = setCalendarData(year, month, monthlyReservation)
 
   return (
     <StyledBox>
