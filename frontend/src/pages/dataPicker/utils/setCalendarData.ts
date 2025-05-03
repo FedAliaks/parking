@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { setDayColor } from './setDayColor';
 
-export interface CalendarDayData {
+interface TSetCalendarData {
   key: number;
   day: number | null;
   bgColor: string;
@@ -11,7 +11,7 @@ export const setCalendarData = (
   year: number,
   month: number,
   monthlyReservation: number[],
-): CalendarDayData[] => {
+): TSetCalendarData[] => {
   const calendarCells: (number | null)[] = [];
 
   const startDayOfWeek = dayjs(`${year}-${month + 1}-01`).day() || 7;

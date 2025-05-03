@@ -20,8 +20,11 @@ import {
   isBeforeCurrentMonth,
   setCalendarData,
 } from './utils';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../routes/path';
 
 export const DataPickerPage = () => {
+  const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState(dayjs());
   const [reservedSlots, setReservedSlots] = useState<TReservationSlotsResponse[]>([]);
   const [currentSlot, setCurrentSlot] = useState<TSlotsParametersResponse | null>(null);
@@ -67,6 +70,12 @@ export const DataPickerPage = () => {
 
   const handleNextMonth = () => setCurrentDate(currentDate.add(1, 'month'));
 
+  const handleDayClick = (day: number) => {
+    const selectedDate = dayjs().year(currentDate.year()).month(currentDate.month()).date(day);
+    const date = selectedDate.format('YYYY-MM-DD');
+    navigate(`${AppRoutes.SLOTS}?date=${date}`);
+  };
+
   return (
     <StyledBox>
       <StyledTitle>PARKING PRO Reservation</StyledTitle>
@@ -99,7 +108,6 @@ export const DataPickerPage = () => {
           <Box
             key={key}
             height={40}
-            width={40}
             display="flex"
             justifyContent="center"
             alignItems="center"
@@ -107,6 +115,12 @@ export const DataPickerPage = () => {
               border: `2px solid ${COLORS.lightColor}`,
               borderRadius: 2,
               backgroundColor: day ? bgColor : 'transparent',
+              cursor: day ? 'pointer' : 'auto',
+            }}
+            onClick={() => {
+              if (day) {
+                handleDayClick(day);
+              }
             }}
           >
             {day && <span>{day}</span>}

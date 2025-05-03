@@ -7,11 +7,15 @@ import {
   StyledTitle,
   StyledTypography,
 } from '../../components/ui';
-import { COLORS } from '../../constants';
+import { COLORS, ParkingSlotIdStorage } from '../../constants';
+import { useSearchParams } from 'react-router-dom';
+import dayjs from 'dayjs';
+import { getAllSlots } from './utils';
 
 interface TimeSlot {
   time: string;
   available: boolean;
+  user_id_reserved?: string;
 }
 
 // Генерация слотов от 00:00 до 23:00 (по часу)
@@ -29,10 +33,35 @@ const generateTimeSlots = (): TimeSlot[] => {
 };
 
 export const AvailableSlotsPage = () => {
+  const [searchParams] = useSearchParams();
+  const dateParam = searchParams.get('date') || '';
+  const formatCurrentDay = dayjs(dateParam).format('MMM D');
+  console.log(dateParam);
+
   const [slots, setSlots] = useState<TimeSlot[]>(generateTimeSlots());
   const [selectedSlots, setSelectedSlots] = useState<string[]>([]);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const firstSelectedRef = useRef<HTMLDivElement>(null);
+
+  console.log(slots);
+
+  useEffect(() => {
+    const fetchSlots = async () => {
+      const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
+      if (!parkingSlotID || !dateParam) return;
+      console.log('asdf');
+      console.log(slots);
+
+      try {
+        const slots = await getAllSlots(parkingSlotID, dateParam);
+        console.log(slots);
+      } catch (error) {
+        console.error('Ошибка при загрузке слотов:', error);
+      }
+    };
+
+    fetchSlots();
+  }, []);
 
   // Скроллим к первому выбранному слоту
   useEffect(() => {
@@ -60,7 +89,7 @@ export const AvailableSlotsPage = () => {
 
   return (
     <StyledBox>
-      <StyledTitle>Available slots for May 2:</StyledTitle>
+      <StyledTitle>{`Available slots for ${formatCurrentDay}:`}</StyledTitle>
 
       <Box
         ref={scrollContainerRef}

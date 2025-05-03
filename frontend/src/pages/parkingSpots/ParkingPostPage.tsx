@@ -12,6 +12,8 @@ import { StyledBox, StyledSubtitle, StyledTitle, StyledTypography } from '../../
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../routes/path';
+import { API_BASE_URL } from '../../../config';
+import { ApiRoutes } from '../../api';
 
 type TSpot = {
   id: string;
@@ -27,7 +29,7 @@ export const ParkingSpotsPage = () => {
   useEffect(() => {
     const fetchSpots = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/parking-spot');
+        const response = await fetch(`${API_BASE_URL}/${ApiRoutes.PARKING_SLOTS}`);
 
         if (!response.ok) {
           const errorData = await response.json();

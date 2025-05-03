@@ -41,6 +41,7 @@ export class UserService {
 
     return {
       access_token: token,
+      user_id: user.id
     };
   }
 
@@ -61,8 +62,12 @@ export class UserService {
 
     const token = this.jwtService.sign(payload);
 
+    console.log(token)
+    console.log(user.id)
+
     return {
       access_token: token,
+      user_id: user.id,
     };
   }
 

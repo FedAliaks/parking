@@ -1,0 +1,1 @@
+export { getAllSlots } from './getAllSlots';

@@ -1,9 +1,10 @@
+import { API_BASE_URL } from '../../../../config';
 import { ApiRoutes } from '../../../api';
 
 export const getAllReservationBySlotsId = async (id: string) => {
   try {
     const response = await fetch(
-      `http://localhost:3000/${ApiRoutes.PARKING_SLOTS}/${id}/available-dates`,
+      `${API_BASE_URL}/${ApiRoutes.PARKING_SLOTS}/${id}/available-dates`,
       {
         method: 'GET',
         credentials: 'include',
