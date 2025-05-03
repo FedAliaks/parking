@@ -35,13 +35,13 @@ export class UserService {
 
     await this.userRepo.save(user);
 
-        const payload = { sub: user.id, email: user.email };
+    const payload = { sub: user.id, email: user.email };
 
-        const token = this.jwtService.sign(payload);
+    const token = this.jwtService.sign(payload);
 
-        return {
-          access_token: token,
-        };
+    return {
+      access_token: token,
+    };
   }
 
   async login(dto: LoginUserDto) {

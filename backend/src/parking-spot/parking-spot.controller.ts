@@ -11,10 +11,20 @@ export class ParkingSpotController {
   }
 
   @Get(':id/available-times')
-  async getAllBlockedSlots(
+  async getAllBlockedSlotsByDate(
     @Param('id') id: string,
     @Query('date') date: string,
   ) {
-    return this.parkingSpotService.getAllBlockedSlots(id, date);
+    return this.parkingSpotService.getAllBlockedSlotsByDate(id, date);
+  }
+
+  @Get(':id/available-dates')
+  async getAllBlockedSlotsByIdSlot(@Param('id') id: string) {
+    return this.parkingSpotService.getAllBlockedSlotsByIdSlot(id);
+  }
+
+  @Get(':id')
+  async getParkingSlotById(@Param('id') id: string) {
+    return this.parkingSpotService.getParkingSlotById(id);
   }
 }

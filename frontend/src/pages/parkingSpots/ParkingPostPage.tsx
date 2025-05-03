@@ -1,5 +1,4 @@
 import {
-  Box,
   Paper,
   Table,
   TableBody,
@@ -8,30 +7,48 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { COLORS } from '../../constants';
+import { COLORS, ParkingSlotIdStorage } from '../../constants';
 import { StyledBox, StyledSubtitle, StyledTitle, StyledTypography } from '../../components/ui';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../routes/path';
 
-const parkingSpots = [
-  { name: 'A–01', address: 'Street 1' },
-  { name: 'A–02', address: 'Street 2' },
-  { name: 'B–01', address: 'Street 3' },
-  { name: 'C–05', address: 'Street 4' },
-  { name: 'A–02', address: 'Street 2' },
-  { name: 'B–01', address: 'Street 3' },
-  { name: 'C–05', address: 'Street 4' },
-  { name: 'A–02', address: 'Street 2' },
-  { name: 'B–01', address: 'Street 3' },
-  { name: 'C–05', address: 'Street 4' },
-  { name: 'B–01', address: 'Street 3' },
-  { name: 'C–05', address: 'Street 4' },
-  { name: 'A–02', address: 'Street 2' },
-  { name: 'B–01', address: 'Street 3' },
-  { name: 'C–05', address: 'Street 4' },
-];
+type TSpot = {
+  id: string;
+  name: string;
+  location: string;
+};
 
 export const ParkingSpotsPage = () => {
+  const [spots, setSpots] = useState<TSpot[]>([]);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchSpots = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/parking-spot');
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to load parking spots');
+        }
+
+        const data = await response.json();
+        setSpots(data);
+      } catch (err: any) {
+        console.error('Fetch error:', err.message);
+        setError(err.message || 'Unknown error');
+      }
+    };
+
+    fetchSpots();
+  }, []);
+
   const handleChooseParkingPost = (id: string) => {
     console.log(id);
+    localStorage.setItem(ParkingSlotIdStorage, id);
+    navigate(AppRoutes.DATES);
   };
 
   return (
@@ -48,9 +65,9 @@ export const ParkingSpotsPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {parkingSpots.map((spot, index) => (
+            {spots.map(spot => (
               <TableRow
-                key={index}
+                key={spot.id}
                 sx={{
                   cursor: 'pointer',
                   transition: 'background-color 0.6s ease',
@@ -58,17 +75,17 @@ export const ParkingSpotsPage = () => {
                     backgroundColor: COLORS.hoverPrimaryColor,
                   },
                 }}
-                onClick={() => handleChooseParkingPost(spot.name)}
+                onClick={() => handleChooseParkingPost(spot.id)}
               >
                 <TableCell align="center">{spot.name}</TableCell>
-                <TableCell align="center">{spot.address}</TableCell>
+                <TableCell align="center">{spot.location}</TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
 
-      <StyledTypography>{`All places: ${parkingSpots.length + 1}`}</StyledTypography>
+      <StyledTypography>{`All places: ${spots.length}`}</StyledTypography>
     </StyledBox>
   );
 };

@@ -1,8 +1,9 @@
 import { AuthPage, AvailableSlotsPage, DataPickerPage, ParkingSpotsPage } from '../pages';
+import { AppRoutes } from './path';
 
 export const routes = [
-  { path: '/', element: <AuthPage /> },
-  { path: '/parking', element: <ParkingSpotsPage /> },
-  { path: '/slots', element: <AvailableSlotsPage /> },
-  { path: '/dates', element: <DataPickerPage /> },
+  { path: AppRoutes.ROOT, element: <AuthPage /> },
+  { path: AppRoutes.PARKING, element: <ParkingSpotsPage /> },
+  { path: AppRoutes.SLOTS, element: <AvailableSlotsPage /> },
+  { path: AppRoutes.DATES, element: <DataPickerPage /> },
 ];

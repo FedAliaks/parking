@@ -1,13 +1,12 @@
-import { Box, Typography, IconButton } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import 'dayjs/locale/ru';
 import { daysOfWeek } from './constants';
-import { COLORS } from '../../constants';
+import { COLORS, ParkingSlotIdStorage } from '../../constants';
 import {
   StyledBox,
   StyledFlexBox,
@@ -15,20 +14,47 @@ import {
   StyledTitle,
   StyledTypography,
 } from '../../components/ui';
+import { getAllReservationBySlotsId } from './utils/getAllReservationBySlotsId';
+import { TReservationSlotsResponse, TSlotsParametersResponse } from './types';
+import { getParkingSlotById } from './utils/getParkingSlotById';
 
 dayjs.locale('en');
 
-const getMockAvailability = (year: number, month: number) => {
-  const daysInMonth = dayjs(`${year}-${month + 1}-01`).daysInMonth();
-  const availability: Record<number, boolean> = {};
-  for (let day = 1; day <= daysInMonth; day++) {
-    availability[day] = Math.random() > 0.7;
-  }
-  return availability;
-};
-
 export const DataPickerPage = () => {
   const [currentDate, setCurrentDate] = useState(dayjs());
+  const [reservetedSlots, setReservedSlots] = useState<TReservationSlotsResponse[]>([]);
+  const [currentSlot, setCurrentSlot] = useState<TSlotsParametersResponse | null>(null);
+
+  const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [reservations, currentSlot] = await Promise.all([
+          getAllReservationBySlotsId(parkingSlotID),
+          getParkingSlotById(parkingSlotID),
+        ]);
+
+        setReservedSlots(reservations);
+        setCurrentSlot(currentSlot);
+      } catch (error) {
+        console.error('Error in request:', error);
+      }
+    };
+
+    if (parkingSlotID) {
+      fetchData();
+    }
+  }, []);
+
+  const getMockAvailability = (year: number, month: number) => {
+    const daysInMonth = dayjs(`${year}-${month + 1}-01`).daysInMonth();
+    const availability: Record<number, boolean> = {};
+    for (let day = 1; day <= daysInMonth; day++) {
+      availability[day] = Math.random() > 0.7;
+    }
+    return availability;
+  };
 
   const year = currentDate.year();
   const month = currentDate.month();
@@ -53,8 +79,8 @@ export const DataPickerPage = () => {
     <StyledBox>
       <StyledTitle>PARKING PRO Reservation</StyledTitle>
       <StyledFlexBox flexDirection="row">
-        <StyledSubtitle>Place A-02</StyledSubtitle>
-        <StyledTypography>Street 1</StyledTypography>
+        <StyledSubtitle>{`Place: ${currentSlot?.name}`}</StyledSubtitle>
+        <StyledTypography>{`Place: ${currentSlot?.location}`}</StyledTypography>
       </StyledFlexBox>
 
       <StyledFlexBox flexDirection="row">

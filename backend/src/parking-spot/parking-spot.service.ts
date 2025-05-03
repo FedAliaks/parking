@@ -31,12 +31,28 @@ export class ParkingSpotService implements OnModuleInit {
     return this.parkingSpotRepo.find();
   }
 
-  async getAllBlockedSlots(id: string, date: string) {
+  async getParkingSlotById(id: string) {
+    await this.isValidParkingSlot(id);
+
+    return this.parkingSpotRepo.findOne({
+      where: { id: id },
+    });
+  }
+
+  async getAllBlockedSlotsByDate(id: string, date: string) {
     await this.isValidParkingSlot(id);
     this.isValidDateString(date);
 
     return this.reservationRepo.find({
       where: { parking_spot_id: id, reserved_date: new Date(date) },
+    });
+  }
+
+  async getAllBlockedSlotsByIdSlot(id: string) {
+    await this.isValidParkingSlot(id);
+
+    return this.reservationRepo.find({
+      where: { parking_spot_id: id },
     });
   }
 

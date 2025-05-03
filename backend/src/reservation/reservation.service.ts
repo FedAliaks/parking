@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Reservation } from 'database/entities/reservation.entity';
 import { Repository } from 'typeorm';
@@ -18,8 +22,17 @@ export class ReservationService {
   async setReservation(dto: SetReservationDTO) {
     const originalDate = new Date(dto.date);
     originalDate.setMinutes(0, 0, 0);
-    const reservedDate = dto.date.toISOString().split('T')[0];
+    const reservedDate = new Date(dto.date.toISOString().split('T')[0]);
     const reservedTime = originalDate.toTimeString().split(' ')[0];
+
+    const isReserved = await this.isSpotAlreadyReserved(
+      dto.spot,
+      reservedDate,
+      reservedTime,
+    );
+    if (isReserved) {
+      throw new BadRequestException('Place has already reserved');
+    }
 
     const reservation = this.reservationRepo.create({
       user_id: dto.user,
@@ -59,5 +72,22 @@ export class ReservationService {
     if (!user) {
       throw new NotFoundException('User has not found');
     }
+  }
+
+  private async isSpotAlreadyReserved(
+    spotId: string,
+    date: Date,
+    time: string,
+  ): Promise<boolean> {
+    const existing = await this.reservationRepo.findOne({
+      where: {
+        parking_spot_id: spotId,
+        reserved_date: date,
+        reserved_time: time,
+        status: true,
+      },
+    });
+
+    return !!existing;
   }
 }

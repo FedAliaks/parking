@@ -12,6 +12,7 @@ import {
 } from '../../components/ui';
 import { sendAuthRequest } from './utils/sendAuthRequest';
 import { useNavigate } from 'react-router-dom';
+import { AppRoutes } from '../../routes/path';
 
 export const AuthPage = () => {
   const [tab, setTab] = useState(0);
@@ -36,7 +37,7 @@ export const AuthPage = () => {
       const data = await sendAuthRequest(endpoint, email, password);
       console.log(`${endpoint} successful:`, data);
       setErrorMsg('');
-      navigate('/parking');
+      navigate(AppRoutes.PARKING);
     } catch (error) {
       if (error instanceof Error) {
         setErrorMsg(error.message);
