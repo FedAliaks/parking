@@ -31,6 +31,7 @@ export const StyledButton: React.FC<IStyledButtonProps> = ({
         backgroundColor: variant === 'contained' && !disabled ? COLORS.primaryColor : undefined,
         color: variant === 'outlined' && !disabled ? COLORS.primaryColor : undefined,
         borderColor: variant === 'outlined' && !disabled ? COLORS.primaryColor : undefined,
+        m: 1,
 
         '&:hover': {
           backgroundColor:

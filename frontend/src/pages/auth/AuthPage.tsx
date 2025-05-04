@@ -1,6 +1,6 @@
 import { Tabs } from '@mui/material';
 import { useState } from 'react';
-import { COLORS, REGEXP_EMAIL } from '../../constants';
+import { COLORS, minPasswordLength, REGEXP_EMAIL } from '../../constants';
 import {
   StyledBox,
   StyledButton,
@@ -54,7 +54,7 @@ export const AuthPage = () => {
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setIsPasswordValid(value.length > 6);
+    setIsPasswordValid(value.length > minPasswordLength);
     setPassword(event.target.value);
     setErrorMsg('');
   };

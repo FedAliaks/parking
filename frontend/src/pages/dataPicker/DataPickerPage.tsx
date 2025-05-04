@@ -7,6 +7,7 @@ import { daysOfWeek } from './constants';
 import { COLORS, ParkingSlotIdStorage } from '../../constants';
 import {
   StyledBox,
+  StyledButton,
   StyledFlexBox,
   StyledSubtitle,
   StyledTitle,
@@ -42,6 +43,8 @@ export const DataPickerPage = () => {
           getAllReservationBySlotsId(parkingSlotID),
           getParkingSlotById(parkingSlotID),
         ]);
+        console.log('reservation')
+        console.log(reservations)
 
         setReservedSlots(reservations);
         setCurrentSlot(currentSlot);
@@ -75,6 +78,10 @@ export const DataPickerPage = () => {
     const date = selectedDate.format('YYYY-MM-DD');
     navigate(`${AppRoutes.SLOTS}?date=${date}`);
   };
+
+  const handleGoToTheChoosePlaceClick = () => {
+    navigate(AppRoutes.PARKING)
+  }
 
   return (
     <StyledBox>
@@ -127,6 +134,9 @@ export const DataPickerPage = () => {
           </Box>
         ))}
       </Box>
+              <StyledButton onClick={handleGoToTheChoosePlaceClick}>
+                Go to choose place page
+              </StyledButton>
     </StyledBox>
   );
 };
