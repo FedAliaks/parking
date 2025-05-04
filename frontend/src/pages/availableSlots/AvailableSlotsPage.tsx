@@ -10,7 +10,7 @@ import {
 import { COLORS, ParkingSlotIdStorage, UserIdStorage } from '../../constants';
 import { useSearchParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { getAllSlots } from './utils';
+import { getAllSlots, setNewReservation } from './utils';
 import { TFetchSlots, TimeSlot } from './types';
 import { generateTimeSlots } from './utils/generateTimeSlots';
 
@@ -18,7 +18,11 @@ export const AvailableSlotsPage = () => {
   const [searchParams] = useSearchParams();
   const dateParam = searchParams.get('date') || '';
   const formatCurrentDay = dayjs(dateParam).format('MMM D');
-  console.log(dateParam);
+  const isToday = dayjs().isSame(dayjs(dateParam), 'day');
+        const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
+        const userId = localStorage.getItem(UserIdStorage) || '';
+        console.log(userId)
+
 
   const [slots, setSlots] = useState<TimeSlot[]>([]);
   const [fetchSlots, setFetchSlots] = useState<TFetchSlots[]>([]);
@@ -28,21 +32,17 @@ export const AvailableSlotsPage = () => {
 
   useEffect(() => {
     const fetchSlots = async () => {
-      const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
-      const userId = localStorage.getItem(UserIdStorage) || '';
 
-      if (!parkingSlotID || !dateParam || !userId) return;
-      console.log('asdf');
-      console.log(userId);
-      console.log(slots);
+    
+
+    if (!parkingSlotID || !dateParam || !userId) return;
+
 
       try {
         const slots: TFetchSlots[] = await getAllSlots(parkingSlotID, dateParam);
-        console.log('slots');
-        console.log(slots);
         setFetchSlots(slots);
       } catch (error) {
-        console.error('Ошибка при загрузке слотов:', error);
+        console.error('Fetch slots was crash:', error);
       }
     };
 
@@ -51,30 +51,32 @@ export const AvailableSlotsPage = () => {
 
   useEffect(() => {
     console.log('generateTimeSlots');
-    setSlots(generateTimeSlots(fetchSlots));
+    setSlots(generateTimeSlots(fetchSlots, isToday));
   }, [fetchSlots]);
 
-  // Скроллим к первому выбранному слоту
-  useEffect(() => {
-    if (firstSelectedRef.current && scrollContainerRef.current) {
-      const container = scrollContainerRef.current;
-      const offsetTop = firstSelectedRef.current.offsetTop;
-      const slotHeight = firstSelectedRef.current.offsetHeight;
-      container.scrollTop = offsetTop - slotHeight * 2;
-    }
-  }, [slots]);
+
 
   const handleSelect = (time: string) => {
     setSelectedSlots(prev => [...prev, time]);
   };
 
   const handleDeselect = (time: string) => {
-    setSelectedSlots(prev => prev.filter(t => t !== time));
+    setSelectedSlots(prev => prev.filter(item => item !== time));
   };
 
-  const handleBookSlots = () => {
-    console.log('book slots');
-  };
+const handleBookSlots = async () => {
+  console.log('book slots');
+
+  try {
+    await setNewReservation(selectedSlots, dateParam);
+
+    const updated = await getAllSlots(parkingSlotID, dateParam);
+    setFetchSlots(updated);
+    setSelectedSlots([])
+  } catch (error) {
+    console.error('Mistake handleBookSlots');
+  }
+};
 
   const isSelected = (time: string) => selectedSlots.includes(time);
 
