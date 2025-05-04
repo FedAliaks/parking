@@ -84,7 +84,9 @@ export const DataPickerPage = () => {
     navigate(AppRoutes.PARKING);
   };
 
-
+  const handleGoToMyReservation = () => {
+    navigate(AppRoutes.MY_RESERVATION);
+  };
 
   return (
     <StyledBox>
@@ -117,6 +119,7 @@ export const DataPickerPage = () => {
         {createCalendarCells(handleDayClick, calendarData, currentDate)}
       </Box>
       <StyledButton onClick={handleGoToTheChoosePlaceClick}>Go to choose place page</StyledButton>
+      <StyledButton onClick={handleGoToMyReservation}>Go to my reservations</StyledButton>
     </StyledBox>
   );
 };

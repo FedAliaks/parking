@@ -7,5 +7,5 @@ export const COLORS = {
   fullReservedColor: '#D9534F',
   emptyReservedColor: '#5CB85C',
   partReservedColor: '#F0AD4E',
-  disabledColor: '#D9A6A6',
+  additionalColor: '#D9A6A6',
 };

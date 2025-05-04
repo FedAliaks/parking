@@ -3,4 +3,5 @@ export enum AppRoutes {
   PARKING = '/parking',
   SLOTS = '/slots',
   DATES = '/dates',
+  MY_RESERVATION = '/my-reservations',
 }

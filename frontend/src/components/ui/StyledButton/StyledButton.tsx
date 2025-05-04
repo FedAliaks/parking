@@ -40,7 +40,7 @@ export const StyledButton: React.FC<IStyledButtonProps> = ({
         },
 
         '&.Mui-disabled': {
-          backgroundColor: COLORS.disabledColor,
+          backgroundColor: COLORS.additionalColor,
         },
       }}
     >

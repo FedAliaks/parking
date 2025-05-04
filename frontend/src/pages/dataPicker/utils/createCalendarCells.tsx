@@ -7,9 +7,9 @@ import { TSetCalendarData } from './types';
 export const createCalendarCells = (
   handleDayClick: (day: number) => void,
   calendarData: TSetCalendarData[],
-  currentDate: dayjs.Dayjs
+  currentDate: dayjs.Dayjs,
 ): React.ReactElement[] => {
-  return  calendarData.map(({ key, day, bgColor }) => {
+  return calendarData.map(({ key, day, bgColor }) => {
     const selectedDate = day
       ? dayjs().year(currentDate.year()).month(currentDate.month()).date(day)
       : null;
@@ -22,16 +22,12 @@ export const createCalendarCells = (
       }
     };
 
-    const backgroundColor = day
-      ? isPastDate
-        ? COLORS.disabledColor
-        : bgColor
-      : 'transparent';
+    const backgroundColor = day ? (isPastDate ? COLORS.additionalColor : bgColor) : 'transparent';
 
     const cursor = day ? (isPastDate ? 'auto' : 'pointer') : 'auto';
 
     return (
-        <Box
+      <Box
         key={key}
         height={40}
         display="flex"
@@ -47,7 +43,6 @@ export const createCalendarCells = (
       >
         {day && <span>{day}</span>}
       </Box>
-
     );
   });
 };
