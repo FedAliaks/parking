@@ -1,1 +1,1 @@
-export {sendAuthRequest} from './sendAuthRequest'
+export { sendAuthRequest } from './sendAuthRequest';

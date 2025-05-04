@@ -3,7 +3,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { COLORS, minPasswordLength, REGEXP_EMAIL } from '@/constants';
 import { sendAuthRequest } from './utils';
-import { StyledBox, StyledTitle, StyledTab, StyledFlexBox, StyledTextField, StyledButton, StyledTypography } from '@/components/ui';
+import {
+  StyledBox,
+  StyledTitle,
+  StyledTab,
+  StyledFlexBox,
+  StyledTextField,
+  StyledButton,
+  StyledTypography,
+} from '@/components/ui';
 import { AppRoutes } from '@/routes/path';
 
 export const AuthPage = () => {

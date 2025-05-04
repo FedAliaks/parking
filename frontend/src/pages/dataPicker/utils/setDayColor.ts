@@ -1,5 +1,4 @@
-import { COLORS, countHoursInDay } from "@/constants";
-
+import { COLORS, countHoursInDay } from '@/constants';
 
 export const setDayColor = (count: number | null): string => {
   if (count === 0) return COLORS.emptyReservedColor;

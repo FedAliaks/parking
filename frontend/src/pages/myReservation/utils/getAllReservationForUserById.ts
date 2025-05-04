@@ -1,13 +1,17 @@
-import { ApiRoutes } from "@/api";
-import { API_BASE_URL } from "@/config";
-
+import { ApiRoutes } from '@/api';
+import { API_BASE_URL } from '@/config';
+import { ParkingSlotIdStorage } from '@/constants';
 
 export const getAllReservationForUserById = async (userId: string) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/${ApiRoutes.RESERVATION}/${userId}`, {
-      method: 'GET',
-      credentials: 'include',
-    });
+    const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
+    const response = await fetch(
+      `${API_BASE_URL}/${ApiRoutes.RESERVATION}/${userId}?parkingSlotId=${parkingSlotID}`,
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    );
 
     const data = await response.json();
 

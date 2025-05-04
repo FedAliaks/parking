@@ -1,7 +1,6 @@
 import { COLORS } from '@/constants';
 import { Typography } from '@mui/material';
 
-
 interface IStyledTitleProps {
   children: string;
 }

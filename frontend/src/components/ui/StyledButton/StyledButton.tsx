@@ -1,7 +1,6 @@
 import { COLORS } from '@/constants';
 import { Button } from '@mui/material';
 
-
 export interface IStyledButtonProps {
   size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;

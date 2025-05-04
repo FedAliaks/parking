@@ -1,6 +1,5 @@
-import { ApiRoutes } from "@/api";
-import { API_BASE_URL } from "@/config";
-
+import { ApiRoutes } from '@/api';
+import { API_BASE_URL } from '@/config';
 
 export const getAllReservationBySlotsId = async (id: string) => {
   try {

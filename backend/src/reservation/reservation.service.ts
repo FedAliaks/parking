@@ -45,10 +45,18 @@ export class ReservationService {
     return this.reservationRepo.save(reservation);
   }
 
-  async getAllReservationByUserId(id: string) {
+  async getAllReservationByUserId(id: string, parkingSlotId: string) {
     await this.isUserIdValid(id);
+
+    if (!parkingSlotId) {
+      return this.reservationRepo.find({
+        where: { user_id: id },
+        order: { reserved_date: 'DESC', reserved_time: 'DESC' },
+      });
+    }
+
     return this.reservationRepo.find({
-      where: { user_id: id },
+      where: { user_id: id, parking_spot_id: parkingSlotId },
       order: { reserved_date: 'DESC', reserved_time: 'DESC' },
     });
   }

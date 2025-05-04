@@ -2,7 +2,6 @@ import { StyledBox, StyledTitle, StyledButton } from '@/components/ui';
 import { AppRoutes } from '@/routes/path';
 import { useNavigate } from 'react-router-dom';
 
-
 export const NotFoundPage = () => {
   const navigate = useNavigate();
   const handleGoToTheMainPage = () => {

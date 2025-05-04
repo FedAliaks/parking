@@ -3,7 +3,6 @@ import { API_BASE_URL } from '@/config';
 import { ParkingSlotIdStorage, UserIdStorage } from '@/constants';
 import dayjs from 'dayjs';
 
-
 export const setNewReservation = async (selectedSlots: string[], dateParam: string) => {
   const user = localStorage.getItem(UserIdStorage) || '';
   const spot = localStorage.getItem(ParkingSlotIdStorage) || '';

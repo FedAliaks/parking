@@ -1,7 +1,6 @@
 import { COLORS } from '@/constants';
 import { Tab } from '@mui/material';
 
-
 interface IStyledTabProps {
   label: string;
 }

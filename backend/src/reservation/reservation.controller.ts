@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ReservationService } from './reservation.service';
 import { SetReservationDTO } from './dto/set-reservation.dto';
 
@@ -12,8 +20,11 @@ export class ReservationController {
   }
 
   @Get(':id')
-  async getAllReservationByUserId(@Param('id') id: string) {
-    return this.reservationService.getAllReservationByUserId(id);
+  async getAllReservationByUserId(
+    @Param('id') id: string,
+    @Query('parkingSlotId') parkingSlotId: string,
+  ) {
+    return this.reservationService.getAllReservationByUserId(id, parkingSlotId);
   }
 
   @Delete(':id')

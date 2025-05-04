@@ -15,7 +15,6 @@ import {
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 type TSpot = {
   id: string;
   name: string;

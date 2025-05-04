@@ -5,7 +5,13 @@ import dayjs from 'dayjs';
 import { getAllSlots, setNewReservation } from './utils';
 import { TFetchSlots, TimeSlot } from './types';
 import { generateTimeSlots } from './utils/generateTimeSlots';
-import { StyledBox, StyledTitle, StyledTypography, StyledButton, StyledSubtitle } from '@/components/ui';
+import {
+  StyledBox,
+  StyledTitle,
+  StyledTypography,
+  StyledButton,
+  StyledSubtitle,
+} from '@/components/ui';
 import { ParkingSlotIdStorage, UserIdStorage, COLORS } from '@/constants';
 import { AppRoutes } from '@/routes/path';
 
