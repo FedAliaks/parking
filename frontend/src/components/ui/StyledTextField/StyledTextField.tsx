@@ -1,5 +1,5 @@
+import { COLORS } from '@/constants';
 import { TextField } from '@mui/material';
-import { COLORS } from '../../../constants';
 
 interface IStyledTextField {
   label: string;

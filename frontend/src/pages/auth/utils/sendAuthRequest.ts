@@ -1,14 +1,8 @@
+import { ApiRoutes } from '@/api';
+import { UserIdStorage } from '@/constants';
 import Cookies from 'js-cookie';
-import { UserIdStorage } from '../../../constants';
-import { ApiRoutes } from '../../../api';
-import { API_BASE_URL } from '../../../../config';
-
-type TRequestEndpoint = 'register' | 'login';
-
-export type TAuthResponse = {
-  access_token: string;
-  user_id: string;
-};
+import { TAuthResponse, TRequestEndpoint } from './types';
+import { API_BASE_URL } from '@/config';
 
 export const sendAuthRequest = async (
   endpoint: TRequestEndpoint,

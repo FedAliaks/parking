@@ -1,5 +1,6 @@
+import { COLORS } from '@/constants';
 import { Typography } from '@mui/material';
-import { COLORS } from '../../../constants';
+
 
 interface IStyledTypography {
   children: string;

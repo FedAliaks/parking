@@ -1,3 +1,8 @@
+import { ApiRoutes } from '@/api';
+import { StyledBox, StyledTitle, StyledSubtitle, StyledTypography } from '@/components/ui';
+import { API_BASE_URL } from '@/config';
+import { ParkingSlotIdStorage, COLORS } from '@/constants';
+import { AppRoutes } from '@/routes/path';
 import {
   Paper,
   Table,
@@ -7,13 +12,9 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
-import { COLORS, ParkingSlotIdStorage } from '../../constants';
-import { StyledBox, StyledSubtitle, StyledTitle, StyledTypography } from '../../components/ui';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../routes/path';
-import { API_BASE_URL } from '../../../config';
-import { ApiRoutes } from '../../api';
+
 
 type TSpot = {
   id: string;
@@ -57,7 +58,6 @@ export const ParkingSpotsPage = () => {
     <StyledBox>
       <StyledTitle>PARKING</StyledTitle>
       <StyledSubtitle>List of parking slots</StyledSubtitle>
-
       <TableContainer component={Paper} sx={{ maxHeight: 240, overflowY: 'auto' }}>
         <Table size="small" stickyHeader>
           <TableHead>
@@ -86,8 +86,8 @@ export const ParkingSpotsPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
-
       <StyledTypography>{`All places: ${spots.length}`}</StyledTypography>
+      <StyledTypography>{error}</StyledTypography>
     </StyledBox>
   );
 };

@@ -1,5 +1,6 @@
+import { COLORS } from '@/constants';
 import { Button } from '@mui/material';
-import { COLORS } from '../../../constants';
+
 
 export interface IStyledButtonProps {
   size?: 'small' | 'medium' | 'large';

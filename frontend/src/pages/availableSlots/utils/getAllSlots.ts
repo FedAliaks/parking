@@ -1,5 +1,5 @@
-import { API_BASE_URL } from '../../../../config';
-import { ApiRoutes } from '../../../api';
+import { ApiRoutes } from '@/api';
+import { API_BASE_URL } from '@/config';
 
 export const getAllSlots = async (parkingSlotID: string, dateParam: string) => {
   try {

@@ -4,15 +4,6 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import { daysOfWeek } from './constants';
-import { COLORS, ParkingSlotIdStorage } from '../../constants';
-import {
-  StyledBox,
-  StyledButton,
-  StyledFlexBox,
-  StyledSubtitle,
-  StyledTitle,
-  StyledTypography,
-} from '../../components/ui';
 import { TReservationSlotsResponse, TSlotsParametersResponse } from './types';
 import {
   createCalendarCells,
@@ -23,7 +14,10 @@ import {
   setCalendarData,
 } from './utils';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../routes/path';
+import { COLORS, ParkingSlotIdStorage } from '@/constants';
+import { AppRoutes } from '@/routes/path';
+import { StyledBox, StyledButton, StyledFlexBox, StyledSubtitle, StyledTitle, StyledTypography } from '@/components/ui';
+
 
 export const DataPickerPage = () => {
   const navigate = useNavigate();

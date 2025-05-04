@@ -1,8 +1,8 @@
 import React from 'react';
 import dayjs from 'dayjs';
 import { Box } from '@mui/material';
-import { COLORS } from '../../../constants';
 import { TSetCalendarData } from './types';
+import { COLORS } from '@/constants';
 
 export const createCalendarCells = (
   handleDayClick: (day: number) => void,

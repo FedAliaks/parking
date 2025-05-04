@@ -1,5 +1,5 @@
+import { COLORS } from '@/constants';
 import { Box } from '@mui/material';
-import { COLORS } from '../../../constants';
 import { ReactNode } from 'react';
 
 export interface IStyledBoxProps {

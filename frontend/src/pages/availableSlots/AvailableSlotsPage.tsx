@@ -1,19 +1,13 @@
 import { Box, Stack } from '@mui/material';
 import { useEffect, useRef, useState } from 'react';
-import {
-  StyledBox,
-  StyledButton,
-  StyledSubtitle,
-  StyledTitle,
-  StyledTypography,
-} from '../../components/ui';
-import { COLORS, ParkingSlotIdStorage, UserIdStorage } from '../../constants';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { getAllSlots, setNewReservation } from './utils';
 import { TFetchSlots, TimeSlot } from './types';
 import { generateTimeSlots } from './utils/generateTimeSlots';
-import { AppRoutes } from '../../routes/path';
+import { StyledBox, StyledTitle, StyledTypography, StyledButton, StyledSubtitle } from '@/components/ui';
+import { ParkingSlotIdStorage, UserIdStorage, COLORS } from '@/constants';
+import { AppRoutes } from '@/routes/path';
 
 export const AvailableSlotsPage = () => {
   const navigate = useNavigate();

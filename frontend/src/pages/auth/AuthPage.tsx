@@ -1,18 +1,10 @@
 import { Tabs } from '@mui/material';
 import { useState } from 'react';
-import { COLORS, minPasswordLength, REGEXP_EMAIL } from '../../constants';
-import {
-  StyledBox,
-  StyledButton,
-  StyledFlexBox,
-  StyledTab,
-  StyledTextField,
-  StyledTitle,
-  StyledTypography,
-} from '../../components/ui';
-import { sendAuthRequest } from './utils/sendAuthRequest';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../routes/path';
+import { COLORS, minPasswordLength, REGEXP_EMAIL } from '@/constants';
+import { sendAuthRequest } from './utils';
+import { StyledBox, StyledTitle, StyledTab, StyledFlexBox, StyledTextField, StyledButton, StyledTypography } from '@/components/ui';
+import { AppRoutes } from '@/routes/path';
 
 export const AuthPage = () => {
   const [tab, setTab] = useState(0);

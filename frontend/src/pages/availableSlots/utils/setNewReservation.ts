@@ -1,7 +1,8 @@
+import { ApiRoutes } from '@/api';
+import { API_BASE_URL } from '@/config';
+import { ParkingSlotIdStorage, UserIdStorage } from '@/constants';
 import dayjs from 'dayjs';
-import { ParkingSlotIdStorage, UserIdStorage } from '../../../constants';
-import { API_BASE_URL } from '../../../../config';
-import { ApiRoutes } from '../../../api';
+
 
 export const setNewReservation = async (selectedSlots: string[], dateParam: string) => {
   const user = localStorage.getItem(UserIdStorage) || '';

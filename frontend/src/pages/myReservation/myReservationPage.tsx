@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { StyledBox, StyledButton, StyledSubtitle, StyledTitle } from '../../components/ui';
-import { COLORS, UserIdStorage } from '../../constants';
 import { getAllReservationForUserById } from './utils';
 import { TReservations } from './types';
 import {
@@ -13,8 +11,10 @@ import {
   TableRow,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../routes/path';
 import { deleteReservation } from './utils/deleteReservation';
+import { StyledBox, StyledTitle, StyledButton, StyledSubtitle } from '@/components/ui';
+import { UserIdStorage, COLORS } from '@/constants';
+import { AppRoutes } from '@/routes/path';
 
 export const MyReservationPage = () => {
   const [reservations, setReservations] = useState<TReservations[]>([]);
