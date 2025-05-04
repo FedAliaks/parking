@@ -3,6 +3,7 @@ import {
   AvailableSlotsPage,
   DataPickerPage,
   MyReservationPage,
+  NotFoundPage,
   ParkingSpotsPage,
 } from '../pages';
 import { AppRoutes } from './path';
@@ -13,4 +14,5 @@ export const routes = [
   { path: AppRoutes.SLOTS, element: <AvailableSlotsPage /> },
   { path: AppRoutes.DATES, element: <DataPickerPage /> },
   { path: AppRoutes.MY_RESERVATION, element: <MyReservationPage /> },
+  { path: '*', element: <NotFoundPage /> },
 ];
