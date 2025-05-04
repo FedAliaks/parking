@@ -1,2 +1,2 @@
 export { getAllSlots } from './getAllSlots';
-export {setNewReservation} from './setNewReservation'
+export { setNewReservation } from './setNewReservation';

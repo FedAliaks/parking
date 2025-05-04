@@ -19,10 +19,9 @@ export const AvailableSlotsPage = () => {
   const dateParam = searchParams.get('date') || '';
   const formatCurrentDay = dayjs(dateParam).format('MMM D');
   const isToday = dayjs().isSame(dayjs(dateParam), 'day');
-        const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
-        const userId = localStorage.getItem(UserIdStorage) || '';
-        console.log(userId)
-
+  const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
+  const userId = localStorage.getItem(UserIdStorage) || '';
+  console.log(userId);
 
   const [slots, setSlots] = useState<TimeSlot[]>([]);
   const [fetchSlots, setFetchSlots] = useState<TFetchSlots[]>([]);
@@ -32,11 +31,7 @@ export const AvailableSlotsPage = () => {
 
   useEffect(() => {
     const fetchSlots = async () => {
-
-    
-
-    if (!parkingSlotID || !dateParam || !userId) return;
-
+      if (!parkingSlotID || !dateParam || !userId) return;
 
       try {
         const slots: TFetchSlots[] = await getAllSlots(parkingSlotID, dateParam);
@@ -54,8 +49,6 @@ export const AvailableSlotsPage = () => {
     setSlots(generateTimeSlots(fetchSlots, isToday));
   }, [fetchSlots]);
 
-
-
   const handleSelect = (time: string) => {
     setSelectedSlots(prev => [...prev, time]);
   };
@@ -64,19 +57,19 @@ export const AvailableSlotsPage = () => {
     setSelectedSlots(prev => prev.filter(item => item !== time));
   };
 
-const handleBookSlots = async () => {
-  console.log('book slots');
+  const handleBookSlots = async () => {
+    console.log('book slots');
 
-  try {
-    await setNewReservation(selectedSlots, dateParam);
+    try {
+      await setNewReservation(selectedSlots, dateParam);
 
-    const updated = await getAllSlots(parkingSlotID, dateParam);
-    setFetchSlots(updated);
-    setSelectedSlots([])
-  } catch (error) {
-    console.error('Mistake handleBookSlots');
-  }
-};
+      const updated = await getAllSlots(parkingSlotID, dateParam);
+      setFetchSlots(updated);
+      setSelectedSlots([]);
+    } catch (error) {
+      console.error('Mistake handleBookSlots');
+    }
+  };
 
   const isSelected = (time: string) => selectedSlots.includes(time);
 

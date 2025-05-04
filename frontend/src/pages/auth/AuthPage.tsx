@@ -1,6 +1,6 @@
 import { Tabs } from '@mui/material';
-import { useRef, useState } from 'react';
-import { COLORS } from '../../constants';
+import { useState } from 'react';
+import { COLORS, REGEXP_EMAIL } from '../../constants';
 import {
   StyledBox,
   StyledButton,
@@ -16,21 +16,18 @@ import { AppRoutes } from '../../routes/path';
 
 export const AuthPage = () => {
   const [tab, setTab] = useState(0);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
-
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setTab(newValue);
   };
 
   const handleClick = async () => {
-    const email = emailRef.current?.value || '';
-    const password = passwordRef.current?.value || '';
-
     const endpoint = tab === 0 ? 'login' : 'register';
 
     try {
@@ -47,13 +44,18 @@ export const AuthPage = () => {
     }
   };
 
-  const handleEmailInput = () => {
-    const valid = emailRef.current?.checkValidity() ?? false;
-    setIsEmailValid(valid);
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setEmail(value);
+    const isValidEmail = REGEXP_EMAIL.test(value);
+    setIsEmailValid(isValidEmail);
     setErrorMsg('');
   };
 
-  const handlePasswordInput = () => {
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setIsPasswordValid(value.length > 6);
+    setPassword(event.target.value);
     setErrorMsg('');
   };
 
@@ -75,19 +77,14 @@ export const AuthPage = () => {
       </Tabs>
 
       <StyledFlexBox>
-        <StyledTextField
-          label="Email"
-          type="email"
-          inputRef={emailRef}
-          onInput={handleEmailInput}
-        />
+        <StyledTextField label="Email" type="email" value={email} onChange={handleEmailChange} />
         <StyledTextField
           label="Password"
           type="password"
-          inputRef={passwordRef}
-          onInput={handlePasswordInput}
+          value={password}
+          onChange={handlePasswordChange}
         />
-        <StyledButton onClick={handleClick} disabled={!isEmailValid}>
+        <StyledButton onClick={handleClick} disabled={!isEmailValid || !isPasswordValid}>
           {tab ? 'Sign Up' : 'Log In'}
         </StyledButton>
       </StyledFlexBox>

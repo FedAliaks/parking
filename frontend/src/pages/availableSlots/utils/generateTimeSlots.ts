@@ -19,7 +19,7 @@ export const generateTimeSlots = (fetchSlots: TFetchSlots[], isToday: boolean): 
     const end = (hour + 1).toString().padStart(2, '0') + ':00';
 
     const isReserved = reservedMap.has(start);
-    
+
     const isPast = isToday && hour < currentHour;
 
     slots.push({

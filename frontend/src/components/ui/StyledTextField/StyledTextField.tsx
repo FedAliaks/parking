@@ -1,26 +1,25 @@
 import { TextField } from '@mui/material';
 import { COLORS } from '../../../constants';
-import { Ref } from 'react';
 
 interface IStyledTextField {
   label: string;
   type?: string;
-  inputRef: Ref<HTMLInputElement>;
-  onInput?: () => void;
+  value: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const StyledTextField: React.FC<IStyledTextField> = ({
   label,
+  value,
   type = 'text',
-  inputRef,
-  onInput,
+  onChange,
 }) => {
   return (
     <TextField
       label={label}
       type={type}
-      inputRef={inputRef}
-      onInput={onInput}
+      value={value}
+      onChange={onChange}
       variant="outlined"
       size="small"
       fullWidth
