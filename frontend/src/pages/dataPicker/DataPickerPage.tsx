@@ -44,13 +44,11 @@ export const DataPickerPage = () => {
           getAllReservationBySlotsId(parkingSlotID),
           getParkingSlotById(parkingSlotID),
         ]);
-        console.log('reservation');
-        console.log(reservations);
 
         setReservedSlots(reservations);
         setCurrentSlot(currentSlot);
       } catch (error) {
-        console.error('Error in request:', error);
+        console.error('Fetch error:', error);
       }
     };
 

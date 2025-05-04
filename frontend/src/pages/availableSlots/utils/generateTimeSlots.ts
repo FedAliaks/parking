@@ -11,7 +11,6 @@ export const generateTimeSlots = (fetchSlots: TFetchSlots[], isToday: boolean): 
     reservedMap.set(hour, slot.user_id);
   });
 
-  console.log(reservedMap);
   const currentHour = dayjs().hour();
 
   for (let hour = 0; hour < 24; hour++) {

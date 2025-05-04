@@ -17,7 +17,6 @@ export const getAllReservationBySlotsId = async (id: string) => {
       throw new Error(data.message || 'Unknown error');
     }
 
-    console.log(data);
     return data;
   } catch (error) {
     if (error instanceof Error) {

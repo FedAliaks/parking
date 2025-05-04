@@ -28,7 +28,7 @@ export const MyReservationPage = () => {
         const reservationsArr = await getAllReservationForUserById(userId);
         setReservations(reservationsArr);
       } catch (error) {
-        console.error('Failed to fetch reservations:', error);
+        console.error('Fetch error:', error);
       }
     };
 
@@ -40,7 +40,7 @@ export const MyReservationPage = () => {
       await deleteReservation(id);
       setReservations(prev => prev.filter(reservation => reservation.id !== id));
     } catch (error) {
-      console.error('Failed to delete reservation:', error);
+      console.error('Fetch error:', error);
     }
   };
 
@@ -50,7 +50,7 @@ export const MyReservationPage = () => {
 
   return (
     <StyledBox>
-      <StyledTitle>My reservations for slot 1</StyledTitle>
+      <StyledTitle>My reservations</StyledTitle>
 
       <TableContainer component={Paper} sx={{ maxHeight: 240, overflowY: 'auto' }}>
         <Table size="small" stickyHeader>

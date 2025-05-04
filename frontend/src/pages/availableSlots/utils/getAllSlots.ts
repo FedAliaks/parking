@@ -17,7 +17,6 @@ export const getAllSlots = async (parkingSlotID: string, dateParam: string) => {
       throw new Error(data.message || 'Unknown error');
     }
 
-    console.log(data);
     return data;
   } catch (error) {
     if (error instanceof Error) {

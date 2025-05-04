@@ -18,7 +18,6 @@ export const getAllReservationForUserById = async (userId: string) => {
     if (!response.ok) {
       throw new Error(data.message || 'Unknown error');
     }
-    console.log(data);
     return data;
   } catch (error) {
     if (error instanceof Error) {

@@ -31,8 +31,7 @@ export const AuthPage = () => {
     const endpoint = tab === 0 ? 'login' : 'register';
 
     try {
-      const data = await sendAuthRequest(endpoint, email, password);
-      console.log(`${endpoint} successful:`, data);
+      await sendAuthRequest(endpoint, email, password);
       setErrorMsg('');
       navigate(AppRoutes.PARKING);
     } catch (error) {

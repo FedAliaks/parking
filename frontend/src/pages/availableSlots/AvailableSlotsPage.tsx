@@ -23,7 +23,6 @@ export const AvailableSlotsPage = () => {
   const isToday = dayjs().isSame(dayjs(dateParam), 'day');
   const parkingSlotID = localStorage.getItem(ParkingSlotIdStorage) || '';
   const userId = localStorage.getItem(UserIdStorage) || '';
-  console.log(userId);
 
   const [slots, setSlots] = useState<TimeSlot[]>([]);
   const [fetchSlots, setFetchSlots] = useState<TFetchSlots[]>([]);
@@ -39,7 +38,7 @@ export const AvailableSlotsPage = () => {
         const slots: TFetchSlots[] = await getAllSlots(parkingSlotID, dateParam);
         setFetchSlots(slots);
       } catch (error) {
-        console.error('Fetch slots was crash:', error);
+        console.error('Fetch error:', error);
       }
     };
 
@@ -47,7 +46,6 @@ export const AvailableSlotsPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log('generateTimeSlots');
     setSlots(generateTimeSlots(fetchSlots, isToday));
   }, [fetchSlots]);
 
@@ -60,7 +58,6 @@ export const AvailableSlotsPage = () => {
   };
 
   const handleBookSlots = async () => {
-    console.log('book slots');
 
     try {
       await setNewReservation(selectedSlots, dateParam);
@@ -69,7 +66,7 @@ export const AvailableSlotsPage = () => {
       setFetchSlots(updated);
       setSelectedSlots([]);
     } catch (error) {
-      console.error('Mistake handleBookSlots');
+      console.error('Fetch error:', error);
     }
   };
 

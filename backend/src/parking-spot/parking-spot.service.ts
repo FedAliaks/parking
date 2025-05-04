@@ -24,7 +24,6 @@ export class ParkingSpotService implements OnModuleInit {
     const count = await this.parkingSpotRepo.count();
     if (count) return;
     await this.parkingSpotRepo.save(mockParkingSpots);
-    console.log('Parking spots have created');
   }
 
   async findAll() {

@@ -48,7 +48,6 @@ export const ParkingSpotsPage = () => {
   }, []);
 
   const handleChooseParkingPost = (id: string) => {
-    console.log(id);
     localStorage.setItem(ParkingSlotIdStorage, id);
     navigate(AppRoutes.DATES);
   };
