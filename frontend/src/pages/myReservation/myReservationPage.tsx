@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../routes/path';
+import { deleteReservation } from './utils/deleteReservation';
 
 export const MyReservationPage = () => {
   const [reservations, setReservations] = useState<TReservations[]>([]);
@@ -34,9 +35,13 @@ export const MyReservationPage = () => {
     fetchReservations();
   }, []);
 
-  const handleDeleteReservationClick = (id: string) => {
-    console.log('delete reservation');
-    console.log(id)
+  const handleDeleteReservationClick = async (id: string) => {
+    try {
+      await deleteReservation(id);
+      setReservations(prev => prev.filter(reservation => reservation.id !== id));
+    } catch (error) {
+      console.error('Failed to delete reservation:', error);
+    }
   };
 
   const handleGoToSlots = () => {
@@ -72,7 +77,9 @@ export const MyReservationPage = () => {
                   <TableCell align="center">{reservation.reserved_date}</TableCell>
                   <TableCell align="center">{reservation.reserved_time}</TableCell>
                   <TableCell>
-                    <StyledButton onClick={() => handleDeleteReservationClick(reservation.id)}>Cancel</StyledButton>
+                    <StyledButton onClick={() => handleDeleteReservationClick(reservation.id)}>
+                      Cancel
+                    </StyledButton>
                   </TableCell>
                 </TableRow>
               ))
