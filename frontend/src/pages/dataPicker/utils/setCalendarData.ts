@@ -1,11 +1,6 @@
 import dayjs from 'dayjs';
 import { setDayColor } from './setDayColor';
-
-interface TSetCalendarData {
-  key: number;
-  day: number | null;
-  bgColor: string;
-}
+import { TSetCalendarData } from './types';
 
 export const setCalendarData = (
   year: number,

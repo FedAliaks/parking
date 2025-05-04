@@ -16,7 +16,7 @@ import { generateTimeSlots } from './utils/generateTimeSlots';
 import { AppRoutes } from '../../routes/path';
 
 export const AvailableSlotsPage = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const dateParam = searchParams.get('date') || '';
   const formatCurrentDay = dayjs(dateParam).format('MMM D');
@@ -76,8 +76,8 @@ export const AvailableSlotsPage = () => {
   const isSelected = (time: string) => selectedSlots.includes(time);
 
   const handleGoToDataPickerClick = () => {
-        navigate(AppRoutes.DATES)
-  }
+    navigate(AppRoutes.DATES);
+  };
 
   return (
     <StyledBox>
@@ -143,9 +143,7 @@ export const AvailableSlotsPage = () => {
 
       <StyledButton onClick={handleBookSlots}>Book slots</StyledButton>
 
-                   <StyledButton onClick={handleGoToDataPickerClick}>
-                Change date
-              </StyledButton>
+      <StyledButton onClick={handleGoToDataPickerClick}>Change date</StyledButton>
     </StyledBox>
   );
 };
