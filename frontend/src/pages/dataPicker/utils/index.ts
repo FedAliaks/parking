@@ -4,3 +4,4 @@ export { getParkingSlotById } from './getParkingSlotById';
 export { isBeforeCurrentMonth } from './isBeforeCurrentMonth';
 export { setCalendarData } from './setCalendarData';
 export { setDayColor } from './setDayColor';
+export {createCalendarCells} from './createCalendarCells'

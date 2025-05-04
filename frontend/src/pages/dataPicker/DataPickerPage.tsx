@@ -15,6 +15,7 @@ import {
 } from '../../components/ui';
 import { TReservationSlotsResponse, TSlotsParametersResponse } from './types';
 import {
+  createCalendarCells,
   getAllReservationBySlotsId,
   getMonthlyReservationArray,
   getParkingSlotById,
@@ -83,43 +84,7 @@ export const DataPickerPage = () => {
     navigate(AppRoutes.PARKING);
   };
 
-  const createCalendarCells = () => {
-    return calendarData.map(({ key, day, bgColor }) => {
-      const selectedDate = day
-        ? dayjs().year(currentDate.year()).month(currentDate.month()).date(day)
-        : null;
 
-      const isPastDate = selectedDate ? selectedDate.isBefore(dayjs(), 'day') : false;
-
-      const handleBoxClick = () => {
-        if (day && !isPastDate) {
-          handleDayClick(day);
-        }
-      };
-
-      const backgroundColor = day ? (isPastDate ? COLORS.disabledColor : bgColor) : 'transparent';
-      const cursor = day ? (isPastDate ? 'auto' : 'pointer') : 'auto';
-
-      return (
-        <Box
-          key={key}
-          height={40}
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          onClick={handleBoxClick}
-          sx={{
-            border: `2px solid ${COLORS.lightColor}`,
-            borderRadius: 2,
-            backgroundColor,
-            cursor,
-          }}
-        >
-          {day && <span>{day}</span>}
-        </Box>
-      );
-    });
-  };
 
   return (
     <StyledBox>
@@ -149,7 +114,7 @@ export const DataPickerPage = () => {
       </Box>
 
       <Box display="grid" gridTemplateColumns="repeat(7, 1fr)" gap={0.5}>
-        {createCalendarCells()}
+        {createCalendarCells(handleDayClick, calendarData, currentDate)}
       </Box>
       <StyledButton onClick={handleGoToTheChoosePlaceClick}>Go to choose place page</StyledButton>
     </StyledBox>
